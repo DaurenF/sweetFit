@@ -1,0 +1,17 @@
+version: '3.7'
+
+volumes:
+  local_postgres_data: {}
+
+services:
+  postgres:
+    image: postgres:12
+    ports:
+      - "5435:5432"
+    environment: {
+      "POSTGRES_PASSWORD": "sweet",
+      "POSTGRES_USER": "sweet",
+      "POSTGRES_DB": "sweet",
+    }
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data

@@ -1,0 +1,34 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: retopay
+    environment: ${ENVIRONMENT:local}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 64MB
+      max-request-size: 64MB
+  jmx:
+    default-domain: retopay
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5435/sweet}
+    username: ${DB_USERNAME:sweet}
+    password: ${DB_PASSWORD:sweet}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        generate_statistics: false
+        default_schema: public
+
+
