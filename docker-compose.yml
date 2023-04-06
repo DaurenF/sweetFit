@@ -1,17 +1,32 @@
 version: '3.7'
 
 volumes:
-  local_postgres_data: {}
+  postgres_data:
 
 services:
   postgres:
-    image: postgres:12
+    image: postgres:12.7
     ports:
-      - "5435:5432"
-    environment: {
-      "POSTGRES_PASSWORD": "sweet",
-      "POSTGRES_USER": "sweet",
-      "POSTGRES_DB": "sweet",
-    }
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: sweet
+      POSTGRES_USER: sweet
+      POSTGRES_DB: sweet
     volumes:
-      - local_postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "9000:9000"
+#    depends_on:
+#      - postgres
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sweet
+#      SPRING_DATASOURCE_USERNAME: sweet
+#      SPRING_DATASOURCE_PASSWORD: sweet
+
+
+
