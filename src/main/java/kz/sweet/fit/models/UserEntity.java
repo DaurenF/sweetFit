@@ -1,8 +1,11 @@
 package kz.sweet.fit.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
 import jakarta.validation.constraints.NotEmpty;
 import kz.sweet.fit.models.enums.Sex;
+import kz.sweet.fit.util.UniqueElementsConstraint;
+import kz.sweet.fit.util.UserValidator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +27,7 @@ public class UserEntity {
     private long id;
     @Column(name = "username")
     @NotEmpty(message = "Username should not be empty")
-    @UniqueElements(message = "Username already taken, please choose another one")
+    @UniqueElementsConstraint(message = "Username already taken, please choose another one")
     private String username;
     @Column(name = "password")
     @NotEmpty(message = "Password should not be empty")

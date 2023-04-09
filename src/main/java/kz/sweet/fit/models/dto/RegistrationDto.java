@@ -6,9 +6,11 @@ import jakarta.validation.constraints.NotEmpty;
 import kz.sweet.fit.models.enums.Sex;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class RegistrationDto {
     @NotEmpty
     String username;

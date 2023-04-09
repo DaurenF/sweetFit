@@ -1,4 +1,6 @@
 package kz.sweet.fit.controllers;
+import kz.sweet.fit.exceptions.BaseExceptionHandler;
+import kz.sweet.fit.models.ErrorResponse;
 import kz.sweet.fit.models.Exercise;
 import kz.sweet.fit.models.enums.Muscle;
 import kz.sweet.fit.services.ExerciseService;
@@ -12,8 +14,14 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/exercise")
 public class ExerciseController {
+
+    private final ExerciseService exerciseService;
+    private final BaseExceptionHandler exceptionHandler;
     @Autowired
-    ExerciseService exerciseService;
+    public ExerciseController(ExerciseService exerciseService, BaseExceptionHandler exceptionHandler) {
+        this.exerciseService = exerciseService;
+        this.exceptionHandler = exceptionHandler;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Exercise>> getAll(){
@@ -36,7 +44,10 @@ public class ExerciseController {
     }
 
 
-
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        return exceptionHandler.handleException(e);
+    }
 
 
     @GetMapping("/init")

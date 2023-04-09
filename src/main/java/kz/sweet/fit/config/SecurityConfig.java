@@ -27,15 +27,9 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**",
-                        "/api/auth/login", "/api/auth/registration","/api/auth/healthcheck","/swagger-ui/**", "/v3/api-docs/**" )
+                .requestMatchers("/api/auth/login", "/api/auth/registration","/api/auth/healthcheck","/swagger-ui/**", "/v3/api-docs/**", "/api/auth/check-username" )
                 .permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/login")
-                .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/", true)
-                .failureUrl("/login?error")
                 .and()
                 .logout()
                 .logoutUrl("/logout")

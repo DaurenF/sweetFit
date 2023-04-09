@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 public class BaseException extends  RuntimeException{
     private String message;
-    private int code;
+    private Integer code;
 
 }
