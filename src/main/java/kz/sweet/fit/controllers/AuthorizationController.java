@@ -14,7 +14,6 @@ import kz.sweet.fit.security.JWTUtil;
 import kz.sweet.fit.services.RegistrationService;
 import kz.sweet.fit.util.UserValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,6 +50,8 @@ public class AuthorizationController {
     @GetMapping("/healthcheck")
     public ResponseEntity<String> healthCheck() {
         log.info("Health check");
+        registrationService.longTask();
+        log.warn("Long task finished");
         Map<String, String> map = new HashMap<>();
         map.put("status", "OK");
         return new ResponseEntity(map, HttpStatus.OK);
@@ -100,11 +101,11 @@ public class AuthorizationController {
 
         log.info("Successful login: {}", authenticationDTO.getUsername());
         String token = jwtUtil.generateToken(authenticationDTO.getUsername());
-        return ResponseEntity.ok(Map.of("jwt-token", token));
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
     @GetMapping("/check-username")
-    public ResponseEntity<Map<String , Boolean>> checkUsernameUnique(@RequestParam("username") String username){
+    public ResponseEntity<Map<String, Boolean>> checkUsernameUnique(@RequestParam("username") String username) {
         log.info("Client request check-username");
         return ResponseEntity.ok(Map.of("exists", registrationService.checkUsernameExists(username)));
     }

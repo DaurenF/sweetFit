@@ -38,11 +38,29 @@ spring:
         generate_statistics: false
         default_schema: public
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: daurenlanguage@gmail.com
+    password: sbqukunzuvwylwmp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+          enable: true
+          required: true
+
+
 
 
 
 jwt:
   secret: ${JWT_SECRET:dauren}
+
+mobizon:
+  url: ${MOBIZON_URL:api.mobizon.kz}
+  apiKey: ${MOBIZON_API_KEY:kza751b7c8b1f9dd9e9c3d862901789f677dc7c295b3725e650d0c51d5d355fcf2a7b9}
 
 
 

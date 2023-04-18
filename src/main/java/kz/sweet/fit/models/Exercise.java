@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "exercises")
+@Table(name = "exercises", indexes = {
+        @Index(name = "exercise_name_index",  columnList="name", unique = true)
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,13 +19,12 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
     @Column(name ="description")
     private String description;
     @Column(name = "main_muscle")
     private Muscle mainMuscle;
-
     public Exercise(String name, String description, Muscle mainMuscle) {
         this.name = name;
         this.description = description;
