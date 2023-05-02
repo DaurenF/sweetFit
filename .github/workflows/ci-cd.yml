@@ -66,3 +66,8 @@ jobs:
         scp -i private_key.pem -o StrictHostKeyChecking=no -r target/ root@104.248.240.110:/root/
         rm -f private_key.pem
       working-directory: ${{ github.workspace }}
+    
+    - name: Restart service
+      run: |
+        ssh root@104.248.240.110 'sudo systemctl restart sweet-fit.service'
+
