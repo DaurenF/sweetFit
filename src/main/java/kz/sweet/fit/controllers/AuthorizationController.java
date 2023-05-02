@@ -54,6 +54,9 @@ public class AuthorizationController {
         log.warn("Long task finished");
         Map<String, String> map = new HashMap<>();
         map.put("status", "OK");
+        map.put("CI-CD", "OK");
+        map.put("Update", "OK");
+
         return new ResponseEntity(map, HttpStatus.OK);
     }
 
