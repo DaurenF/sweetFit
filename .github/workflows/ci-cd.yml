@@ -64,10 +64,8 @@ jobs:
         echo "${{ secrets.DIGITALOCEAN_PRIVATE_KEY }}" > private_key.pem
         chmod 600 private_key.pem
         scp -i private_key.pem -o StrictHostKeyChecking=no -r target/ root@104.248.240.110:/root/
+        ssh -i private_key.pem root@104.248.240.110 'sudo systemctl restart sweet-fit.service'
         rm -f private_key.pem
       working-directory: ${{ github.workspace }}
     
-    - name: Restart service
-      run: |
-        ssh root@104.248.240.110 'sudo systemctl restart sweet-fit.service'
 
