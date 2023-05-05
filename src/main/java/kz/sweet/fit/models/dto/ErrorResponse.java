@@ -1,4 +1,4 @@
-package kz.sweet.fit.models;
+package kz.sweet.fit.models.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

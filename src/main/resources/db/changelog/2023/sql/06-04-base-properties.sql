@@ -1,0 +1,10 @@
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Bench Press', 'Lie on a bench and push a barbell upwards', 0);
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Dumbbell Fly', 'Lie on a bench and bring dumbbells towards the center of your chest', 0);
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Incline Bench Press', 'Lie on an incline bench and push a barbell upwards', 0);
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Push-Ups', 'Push your body off the ground with your arms', 'CHEST');
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Decline Bench Press', 'Lie on a decline bench and push a barbell upwards', 'CHEST');
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Chest Dips', 'Hold onto parallel bars and lower your body between them', 'CHEST');
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Cable Crossover', 'Stand in the middle of two cable machines and bring handles together in front of your chest', 'CHEST');
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Pec Deck Machine', 'Sit at a machine and bring two handles together in front of your chest', 'CHEST');
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Incline Dumbbell Press', 'Lie on an incline bench and push dumbbells upwards', 'CHEST');
+INSERT INTO exercises (name, description, main_muscle) VALUES ('Floor Press', 'Lie on the floor and push a barbell upwards', 'CHEST');

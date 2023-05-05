@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import kz.sweet.fit.exceptions.BaseExceptionHandler;
 import kz.sweet.fit.exceptions.IncorrectCredentialsException;
-import kz.sweet.fit.models.ErrorResponse;
+import kz.sweet.fit.models.dto.ErrorResponse;
 import kz.sweet.fit.models.UserEntity;
 import kz.sweet.fit.models.dto.LoginDto;
 import kz.sweet.fit.models.dto.RegistrationDto;
@@ -20,7 +20,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,8 +62,6 @@ public class AuthorizationController {
         Map<String, String> map = new HashMap<>();
         map.put("status", "OK");
         map.put("CI-CD", "OK");
-        map.put("Update", "OK");
-
         return new ResponseEntity(map, HttpStatus.OK);
     }
 
@@ -85,7 +90,7 @@ public class AuthorizationController {
         registrationService.register(user);
 
         String token = jwtUtil.generateToken(user.getUsername());
-        return Map.of("jwt-token", token);
+        return Map.of("token", token);
     }
 
     @PostMapping("/login")

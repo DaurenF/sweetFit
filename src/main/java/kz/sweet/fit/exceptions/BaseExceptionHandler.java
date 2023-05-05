@@ -1,6 +1,6 @@
 package kz.sweet.fit.exceptions;
 
-import kz.sweet.fit.models.ErrorResponse;
+import kz.sweet.fit.models.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpStatus;

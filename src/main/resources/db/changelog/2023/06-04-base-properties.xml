@@ -4,18 +4,87 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="createTable" author="me">
-        <createTable tableName="person">
-            <column name="id" type="bigint" autoIncrement="true">
+    <changeSet author="Dauren" id="create-exercises">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="exercises"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="exercises">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="main_muscle" type="VARCHAR(255)"/>
         </createTable>
+
+        <insert tableName="exercises">
+            <column name="name" value="Bench Press"/>
+            <column name="description" value="Lie on a bench and push a barbell upwards"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Dumbbell Fly"/>
+            <column name="description" value="Lie on a bench and bring dumbbells towards the center of your chest"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Incline Bench Press"/>
+            <column name="description" value="Lie on an incline bench and push a barbell upwards"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Push-Ups"/>
+            <column name="description" value="Push your body off the ground with your arms"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Decline Bench Press"/>
+            <column name="description" value="Lie on a decline bench and push a barbell upwards"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Chest Dips"/>
+            <column name="description" value="Hold onto parallel bars and lower your body between them"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Cable Crossover"/>
+            <column name="description" value="Stand in the middle of two cable machines and bring handles together in front of your chest"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Pec Deck Machine"/>
+            <column name="description" value="Sit at a machine and bring two handles together in front of your chest"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Incline Dumbbell Press"/>
+            <column name="description" value="Lie on an incline bench and push dumbbells upwards"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
+        <insert tableName="exercises">
+            <column name="name" value="Floor Press"/>
+            <column name="description" value="Lie on the floor and push a barbell upwards"/>
+            <column name="main_muscle" value="CHEST"/>
+        </insert>
+
     </changeSet>
+
+
 
 </databaseChangeLog>
