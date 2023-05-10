@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 import kz.sweet.fit.exceptions.BaseExceptionHandler;
 import kz.sweet.fit.exceptions.IncorrectCredentialsException;
 import kz.sweet.fit.models.dto.ErrorResponse;
-import kz.sweet.fit.models.UserEntity;
+import kz.sweet.fit.models.entity.UserEntity;
 import kz.sweet.fit.models.dto.LoginDto;
 import kz.sweet.fit.models.dto.RegistrationDto;
 import kz.sweet.fit.security.JWTUtil;

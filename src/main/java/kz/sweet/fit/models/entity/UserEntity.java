@@ -1,4 +1,4 @@
-package kz.sweet.fit.models;
+package kz.sweet.fit.models.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

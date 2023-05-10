@@ -1,5 +1,8 @@
 server:
   port: 9000
+  servlet:
+    output-buffering:
+      enabled: true
 
 spring:
   application:

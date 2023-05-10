@@ -1,7 +1,7 @@
 package kz.sweet.fit.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.sweet.fit.models.UserEntity;
+import kz.sweet.fit.models.entity.UserEntity;
 import kz.sweet.fit.models.dto.EmailDto;
 import kz.sweet.fit.security.JWTUtil;
 import kz.sweet.fit.services.EmailService;

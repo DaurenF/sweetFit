@@ -5,8 +5,11 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kz.sweet.fit.exceptions.InvalidJwtTokenException;
+import kz.sweet.fit.exceptions.MissingJwtTokenException;
 import kz.sweet.fit.services.UserDetailsServiceImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -30,13 +33,13 @@ public class JWTFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws IOException, ServletException {
         String authHeader = httpServletRequest.getHeader("Authorization");
-
+        boolean isError = false;
         if (authHeader != null && !authHeader.isBlank() && authHeader.startsWith("Bearer ")) {
             String jwt = authHeader.substring(7);
 
             if (jwt.isBlank()) {
-                httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                        "Invalid JWT Token in Bearer Header");
+                isError = true;
+                throw new MissingJwtTokenException("Missing JWT Token in Bearer Header");
             } else {
                 try {
                     String username = jwtUtil.validateTokenAndRetrieveClaim(jwt);
@@ -51,13 +54,15 @@ public class JWTFilter extends OncePerRequestFilter {
                         SecurityContextHolder.getContext().setAuthentication(authToken);
                     }
                 } catch (JWTVerificationException exc) {
-                    httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                            "Invalid JWT Token");
+                    isError = true;
+                    throw new InvalidJwtTokenException("Invalid JWT Token");
                 }
             }
         }
-
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+        if(!isError) {
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+        }
     }
+
 
 }

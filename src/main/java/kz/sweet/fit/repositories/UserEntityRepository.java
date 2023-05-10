@@ -1,6 +1,6 @@
 package kz.sweet.fit.repositories;
 
-import kz.sweet.fit.models.UserEntity;
+import kz.sweet.fit.models.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

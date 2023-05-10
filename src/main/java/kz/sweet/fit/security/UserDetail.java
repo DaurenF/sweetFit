@@ -1,6 +1,6 @@
 package kz.sweet.fit.security;
 
-import kz.sweet.fit.models.UserEntity;
+import kz.sweet.fit.models.entity.UserEntity;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,17 +1,12 @@
-package kz.sweet.fit.models;
+package kz.sweet.fit.models.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kz.sweet.fit.models.enums.Muscle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "exercises", indexes = {
@@ -20,8 +15,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class Exercise {
+@ToString
+
+public class ExerciseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,9 +28,23 @@ public class Exercise {
     @Column(name = "main_muscle")
     private Muscle mainMuscle;
 
-    public Exercise(String name, String description, Muscle mainMuscle) {
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "technique_id", referencedColumnName = "id")
+    private TechniqueEntity technique;
+
+    public ExerciseEntity(String name, String description, Muscle mainMuscle) {
         this.name = name;
         this.description = description;
         this.mainMuscle = mainMuscle;
+    }
+
+    public ExerciseEntity(String name, String description, Muscle mainMuscle, TechniqueEntity technique) {
+        this.name = name;
+        this.description = description;
+        this.mainMuscle = mainMuscle;
+        this.technique = technique;
+    }
+
+    public ExerciseEntity() {
     }
 }

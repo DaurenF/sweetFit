@@ -1,6 +1,6 @@
 package kz.sweet.fit.util;
 
-import kz.sweet.fit.models.UserEntity;
+import kz.sweet.fit.models.entity.UserEntity;
 import kz.sweet.fit.services.UserDetailsServiceImpl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,8 @@ package kz.sweet.fit.controllers;
 
 import kz.sweet.fit.exceptions.BaseExceptionHandler;
 import kz.sweet.fit.models.dto.ErrorResponse;
-import kz.sweet.fit.models.Exercise;
+import kz.sweet.fit.models.dto.ExerciseDto;
+import kz.sweet.fit.models.entity.ExerciseEntity;
 import kz.sweet.fit.models.enums.Muscle;
 import kz.sweet.fit.services.ExerciseService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,26 +30,32 @@ public class ExerciseController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Exercise>> getAll() {
+    public ResponseEntity<List<ExerciseEntity>> getAll() {
         log.info("Client requiest to /exercise/all ");
         return ResponseEntity.ok(exerciseService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getById(@PathVariable Long id) {
+    public ResponseEntity<ExerciseEntity> getById(@PathVariable Long id) {
         log.info("Client requiest to /exercise/{} ", id);
         return ResponseEntity.ok(exerciseService.getById(id));
     }
 
     @GetMapping("/get-by-muscle-group/{muscleGroup}")
-    public ResponseEntity<List<Exercise>> getByMuscleGroup(@PathVariable Muscle muscleGroup) {
+    public ResponseEntity<List<ExerciseEntity>> getByMuscleGroup(@PathVariable Muscle muscleGroup) {
         log.info("Client requiest to /exercise/{}", muscleGroup);
         return ResponseEntity.ok(exerciseService.getByMuscleGroup(muscleGroup));
     }
     @GetMapping("/get-classic-set/{mainMuscle}")
-    public ResponseEntity<Set<Exercise>> getClassicSet(@PathVariable Muscle mainMuscle) {
+    public ResponseEntity<Set<ExerciseEntity>> getClassicSet(@PathVariable Muscle mainMuscle) {
         log.info("Client requiest to /exercise/{}", mainMuscle);
         return ResponseEntity.ok(exerciseService.getClassicSetByMainMuscle(mainMuscle));
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<ExerciseEntity> saveExercise(@RequestBody ExerciseDto newExercise){
+        log.info("Client requiest to /save/{}", newExercise.toString());
+        return ResponseEntity.ok(exerciseService.save(newExercise));
     }
 
     @ExceptionHandler(Exception.class)

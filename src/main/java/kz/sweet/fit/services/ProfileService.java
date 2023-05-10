@@ -1,7 +1,7 @@
 package kz.sweet.fit.services;
 
 import kz.sweet.fit.exceptions.UserNotFoundException;
-import kz.sweet.fit.models.UserEntity;
+import kz.sweet.fit.models.entity.UserEntity;
 import kz.sweet.fit.repositories.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
