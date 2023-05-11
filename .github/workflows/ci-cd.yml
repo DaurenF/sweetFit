@@ -60,6 +60,17 @@ jobs:
       working-directory: ${{ github.workspace }}
 
     - name: Deploy to DigitalOcean
+      env:
+        ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+        DB_URL: ${{ secrets.DB_URL }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        MOBIZON_URL: ${{ secrets.MOBIZON_URL }}
+        MOBIZON_API_KEY: ${{ secrets.MOBIZON_API_KEY }}
+        DIGITALOCEAN_PRIVATE_KEY: ${{ secrets.DIGITALOCEAN_PRIVATE_KEY }}
       run: |
         echo "${{ secrets.DIGITALOCEAN_PRIVATE_KEY }}" > private_key.pem
         chmod 600 private_key.pem
