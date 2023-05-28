@@ -9,7 +9,6 @@ import kz.sweet.fit.exceptions.InvalidJwtTokenException;
 import kz.sweet.fit.exceptions.MissingJwtTokenException;
 import kz.sweet.fit.services.UserDetailsServiceImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;

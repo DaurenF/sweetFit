@@ -2,7 +2,6 @@ package kz.sweet.fit.config;
 
 import kz.sweet.fit.security.JWTFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -20,9 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    @Qualifier("customAuthenticationEntryPoint")
-    AuthenticationEntryPoint authEntryPoint;
 
     private final JWTFilter jwtFilter;
 
@@ -37,7 +32,8 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/login", "/api/auth/registration", "/api/auth/healthcheck", "/swagger-ui/**", "/v3/api-docs/**", "/api/auth/check-username")
+                .requestMatchers("/api/auth/login", "/api/auth/registration", "/api/auth/healthcheck", "/swagger-ui/**",
+                        "/v3/api-docs/**", "/api/auth/check-username", "/api/auth/google_registration", "/api/exercise/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -48,9 +44,7 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling()
-                .authenticationEntryPoint(authEntryPoint);
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

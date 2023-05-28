@@ -2,6 +2,7 @@ package kz.sweet.fit.controllers;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import kz.sweet.fit.exceptions.BaseExceptionHandler;
@@ -10,6 +11,7 @@ import kz.sweet.fit.models.dto.ErrorResponse;
 import kz.sweet.fit.models.entity.UserEntity;
 import kz.sweet.fit.models.dto.LoginDto;
 import kz.sweet.fit.models.dto.RegistrationDto;
+import kz.sweet.fit.models.enums.Sex;
 import kz.sweet.fit.security.JWTUtil;
 import kz.sweet.fit.services.RegistrationService;
 import kz.sweet.fit.util.UserValidator;
@@ -25,12 +27,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import static org.springframework.security.config.Elements.JWT;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -72,6 +80,35 @@ public class AuthorizationController {
         map.put("JWT", "OK");
         return new ResponseEntity(map, HttpStatus.OK);
     }
+
+
+    @PostMapping(value = "/google_registration", consumes = "application/json")
+    public Map<String, String> performGoogleRegistration(@RequestHeader("Auth") String authorization) throws JsonProcessingException {
+
+        log.info("Google Registration request {}", authorization);
+
+        String[] splitString = authorization.split("\\.");
+        String base64EncodedBody = splitString[1];
+        Base64.Decoder decoder = Base64.getDecoder();
+        String body = new String(decoder.decode(base64EncodedBody));
+
+        // Now body contains the JSON string. Let's parse it.
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(body);
+
+        UserEntity user = new UserEntity();
+        user.setUsername(rootNode.get("email").asText());
+        user.setLastname(rootNode.get("family_name").asText());
+        user.setName(rootNode.get("given_name").asText());
+        user.setPassword(UUID.randomUUID().toString());
+        user.setBirth(LocalDateTime.now().minusYears(18));
+        user.setWeight(70f);
+        user.setHeight(1.75f);
+        user.setSex(Sex.Undefined);
+
+        return Map.of("token", jwtUtil.generateToken(user.getUsername()));
+    }
+
 
     @PostMapping(value = "/registration", consumes = "application/json")
     public Map<String, String> performRegistration(@RequestBody @Valid RegistrationDto registrationDto,

@@ -4,6 +4,8 @@ server:
     output-buffering:
       enabled: true
 
+
+
 spring:
   application:
     name: retopay
@@ -54,16 +56,21 @@ spring:
           enable: true
           required: true
 
-
-
-
-
 jwt:
   secret: ${JWT_SECRET}
 
 mobizon:
   url: ${MOBIZON_URL}
   apiKey: ${MOBIZON_API_KEY}
+
+google:
+  client:
+     id: ${GOOGLE_CLIENT_ID}
+
+
+
+
+
 
 
 

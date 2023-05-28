@@ -17,6 +17,9 @@ public class JWTUtil {
     @Value("${jwt.secret}")
     private String secret;
 
+    @Value("${google.client.id}")
+    private static String CLIENT_ID;
+
     public String generateToken(String username) {
         Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(60).toInstant());
 
@@ -38,4 +41,6 @@ public class JWTUtil {
         DecodedJWT jwt = verifier.verify(token);
         return jwt.getClaim("username").asString();
     }
+
+
 }

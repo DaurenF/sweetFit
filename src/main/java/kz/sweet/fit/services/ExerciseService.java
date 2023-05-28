@@ -40,13 +40,8 @@ public class ExerciseService {
         List<ExerciseEntity> mainList = exerciseRepository.findTop3Rand(mainMuscle.ordinal());
 
         List<ExerciseEntity> secondaryList = exerciseRepository.findTop2Rand(secondaryMuscle.ordinal());
-        Set<ExerciseEntity> set = new HashSet<>();
-        for (int i = 0; i < 3; i++) {
-            set.add(mainList.get(i));
-        }
-        for (int i = 0; i < 2; i++) {
-            set.add(secondaryList.get(i));
-        }
+        Set<ExerciseEntity> set = new HashSet<>(mainList);
+        set.addAll(secondaryList);
         return set;
     }
 
