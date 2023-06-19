@@ -48,7 +48,7 @@ public class ExerciseService {
     public ExerciseEntity save(ExerciseDto newExercise){
         try{
             TechniqueEntity technique = new TechniqueEntity(newExercise.getTechnique());
-            ExerciseEntity exerciseEntity = new ExerciseEntity(newExercise.getName(), newExercise.getDescription(), newExercise.getMainMuscle(), technique);
+            ExerciseEntity exerciseEntity = new ExerciseEntity(newExercise.getId(), newExercise.getName(), newExercise.getDescription(), newExercise.getMainMuscle(), technique);
             return exerciseRepository.save(exerciseEntity);
         }catch (Exception e){
             log.error(e.getMessage());

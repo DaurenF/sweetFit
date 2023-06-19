@@ -1,0 +1,9 @@
+export ENVIRONMENT=prod
+export DB_URL=jdbc:postgresql://127.0.0.1:5432/sweet
+export DB_USERNAME=sweet
+export DB_PASSWORD=sweet
+export MAIL_USERNAME=daurenlanguage@gmail.com
+export MAIL_PASSWORD=sbqukunzuvwylwmp
+export JWT_SECRET=dauren
+export MOBIZON_URL=api.mobizon.kz
+export MOBIZON_API_KEY=kza751b7c8b1f9dd9e9c3d862901789f677dc7c295b3725e650d0c51d5d355fcf2a7b9

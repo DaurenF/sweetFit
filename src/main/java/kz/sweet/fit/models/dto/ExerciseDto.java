@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ExerciseDto {
-
+    private Long id;
     private String name;
     private String description;
     private Muscle mainMuscle;

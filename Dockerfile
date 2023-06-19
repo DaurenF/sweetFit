@@ -1,13 +1,19 @@
+# Build stage
 FROM maven AS build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY src ./src
-
-#to build the application and package it into a JAR file
 RUN mvn package -DskipTests
 
-FROM openjdk:17
+# Runtime stage
+FROM openjdk:17 AS runtime
 WORKDIR /app
 COPY --from=build /app/target/*.jar ./app.jar
-CMD ["java", "-jar", "app.jar"]
+
+# Nginx stage
+FROM nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=runtime /app/app.jar .
+EXPOSE 9000
+CMD service nginx start && java -jar app.jar

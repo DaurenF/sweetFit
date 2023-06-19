@@ -2,9 +2,7 @@ package kz.sweet.fit.models.entity;
 
 import jakarta.persistence.*;
 import kz.sweet.fit.models.enums.Muscle;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,7 +12,6 @@ import lombok.ToString;
 })
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
 
 public class ExerciseEntity {
@@ -38,7 +35,8 @@ public class ExerciseEntity {
         this.mainMuscle = mainMuscle;
     }
 
-    public ExerciseEntity(String name, String description, Muscle mainMuscle, TechniqueEntity technique) {
+    public ExerciseEntity(Long id, String name, String description, Muscle mainMuscle, TechniqueEntity technique) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.mainMuscle = mainMuscle;
