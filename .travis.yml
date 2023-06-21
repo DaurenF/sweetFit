@@ -3,9 +3,9 @@ sudo: required
 services:
   - docker
   - maven
+  - openjdk-17-jdk
 
 before_install:
-  - sudo add-apt-repository ppa:openjdk-r/ppa
   - sudo apt-get update
   - sudo apt-get install maven
   - sudo apt-get install openjdk-17-jdk
