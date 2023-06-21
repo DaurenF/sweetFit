@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker -t dauren/sweetFit build .
+  - docker build -t dauren/sweetFit  .
 
 scripts:
     - docker run dauren/sweetFit
