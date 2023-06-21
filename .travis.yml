@@ -5,9 +5,10 @@ services:
   - maven
 
 before_install:
+  - sudo add-apt-repository ppa:openjdk-r/ppa
   - sudo apt-get update
   - sudo apt-get install maven
-  - sudo apt install openjdk-17-jdk openjdk-17-jre
+  - sudo apt-get install openjdk-17-jdk
   - docker build -t dauren/sweetfit .
 
 scripts:
