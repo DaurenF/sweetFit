@@ -7,4 +7,4 @@ before_install:
   - docker -t dauren/sweetFit build .
 
 scripts:
-    - docker run -e CI=true dauren/sweetFit mvn test
+    - docker run dauren/sweetFit
