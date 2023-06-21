@@ -2,8 +2,11 @@ sudo: required
 
 services:
   - docker
+  - maven
 
 before_install:
+  - sudo apt-get install maven
+  - sudo apt install openjdk-17-jdk
   - docker build -t dauren/sweetfit .
 
 scripts:

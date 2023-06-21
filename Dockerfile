@@ -2,7 +2,7 @@
 FROM maven AS build
 WORKDIR /app
 COPY pom.xml .
-RUN mvn -o install
+RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package -DskipTests
 
