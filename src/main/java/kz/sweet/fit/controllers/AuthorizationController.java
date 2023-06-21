@@ -38,8 +38,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.springframework.security.config.Elements.JWT;
-
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*")

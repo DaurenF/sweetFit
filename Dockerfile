@@ -11,9 +11,4 @@ FROM openjdk:17 AS runtime
 WORKDIR /app
 COPY --from=build /app/target/*.jar ./app.jar
 
-# Nginx stage
-FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=runtime /app/app.jar .
-EXPOSE 9000
-CMD service nginx start && java -jar app.jar
+CMD ["java", "-jar", "app.jar"]

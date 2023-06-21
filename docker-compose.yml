@@ -7,7 +7,7 @@ services:
   postgres:
     image: postgres:12.7
     ports:
-      - "5454:5432"
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: sweet
       POSTGRES_USER: sweet
